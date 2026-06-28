@@ -1,0 +1,5 @@
+<svg width="300" height="56" viewBox="0 0 300 56" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Cyber Pharma">
+  <rect x="0" y="8" width="40" height="40" fill="#F9704F"/>
+  <path d="M20 16c-5 5-10 7.5-10 15a10 10 0 0 0 20 0c0-7.5-5-10-10-15z" fill="#FFFFFF"/>
+  <text x="54" y="37" font-family="Saira, system-ui, sans-serif" font-size="26" font-weight="700" fill="#1B2024">Cyber Pharma</text>
+</svg>
