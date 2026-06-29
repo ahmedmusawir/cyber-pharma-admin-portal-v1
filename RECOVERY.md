@@ -1,16 +1,27 @@
 # Recovery State
 
-Last action: Staged the APPROVED stark-recon run (Tony logging out to fix terminal clipboard).
-Current state: Recon APPROVED (full 6 phases), NOT yet executed. Repo untouched. Crash-safe.
-Pending: Run stark-recon v1.1 on resume.
+Last action (2026-06-29): COMPLETED Phase-1 Pre-Flight Hygiene + Jest dep-hygiene. Build + tests GREEN (81/81, 11/11).
+Current state: jsonsrv cascade / ghl-hooktest / route-1 / layout-org / dup docs/setup.sql DELETED;
+  tsconfig excludes agent_docs+_SKILLS; jest fixed via overrides(jest-mock=30.4.1) + jest-environment-jsdom^30.4.1.
+  Uncommitted (no git ops done): see `git status`. Verified: `npm run build` ✓, `npm test` 81/81 ✓.
+Pending: NOTHING blocking. Architect can author FFM from the recon report.
+Next step: Operator decides recon open-questions (posts cascade / stripe dep / DashboardCard) THEN FFM authoring.
+
+## Standing rule (this session): mirror every plan/report/verification to agent_docs/RESPONSES/
+  pattern response_<date>_<HHMMSS>_<slug>.md BEFORE printing to screen.
+
+## Trail (agent_docs/RESPONSES/)
+- response_2026-06-29_132516_preflight-plan.md
+- response_2026-06-29_134337_preflight-execution-result.md
+- response_2026-06-29_171742_jest-dep-hygiene-plan.md
+- response_2026-06-29_172435_jest-dep-hygiene-result.md
 
 ## ▶ ON RESUME — GO STRAIGHT TO BUSINESS
-1. Read `agent_docs/SESSIONS/session_2026-06-28.md` → follow the RESUME CHECKLIST (it has everything).
-2. Read `agent_docs/STARTER_KIT/STARTER_KIT_HANDBOOK_v1.0.md` (the handbook to verify doc-vs-disk).
-3. Re-read skill payload: `_SKILLS/stark-recon-skill-v1.1/stark-recon/templates/RECON_MISSION.md`.
-4. Run all 6 recon phases READ-ONLY (Day-0 sweep first).
-5. WRITE report to `agent_docs/RECON/RECON_cyber-pharma_phase1_<date>.md` (uppercase RECON/).
-6. On-screen: 1-line confirm + path + 3-5 line headline. STOP at handoff gate.
+1. Read `agent_docs/RECON/RECON_cyber-pharma_phase1_2026-06-28.md` — the recon report (source of truth).
+2. Biggest drifts to honor before any FFM line: app-role.ts MISSING, AppShellPage MISSING,
+   useAuthStore has NO isAdmin/isSuperadmin/isMember flags + user:any, ThemeToggle→ThemeToggler.
+3. Cleanup buckets + open questions are in the report's "Recommendation to Architect".
+4. FFM target: `_SKILLS/super_admin_portal_phase1_ffm/`. Plan: `agent_docs/CYBER_PHARMA_8_PHASE_PLAN_v1_2.md`.
 
 ## Key facts (Tony's corrections — already approved, do NOT re-ask)
 - Approval: Option 1, FULL 6 PHASES. Phase label = `phase1` (Super Admin Portal Phase 1).
