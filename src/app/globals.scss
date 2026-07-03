@@ -2,6 +2,78 @@
 @tailwind components;
 @tailwind utilities;
 
+/* MissionControl — Metro Warm token layer (Mist = light, Slate = dark).
+   Values are the delivered design ground truth (_design .../style_tile.html).
+   Coral (--primary) is brand only, never a status. Flat corners (--radius: 0).
+   Installed here because the token block was absent on disk although the
+   COMPONENT_MANIFEST listed it delivered (doc-vs-disk drift). */
+@layer base {
+  :root {
+    --background: 217 16% 90%;
+    --foreground: 220 24% 16%;
+    --card: 0 0% 100%;
+    --card-foreground: 220 24% 16%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 220 24% 16%;
+    --primary: 12 93% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 216 16% 88%;
+    --secondary-foreground: 220 24% 22%;
+    --muted: 216 16% 93%;
+    --muted-foreground: 220 10% 42%;
+    --accent: 216 16% 90%;
+    --accent-foreground: 220 24% 22%;
+    --border: 216 15% 80%;
+    --input: 216 15% 80%;
+    --ring: 12 93% 64%;
+    --destructive: 2 67% 51%;
+    --destructive-foreground: 0 0% 100%;
+    --success: 131 54% 40%;
+    --success-foreground: 0 0% 100%;
+    --warning: 41 93% 47%;
+    --warning-foreground: 0 0% 100%;
+    --info: 214 74% 53%;
+    --info-foreground: 0 0% 100%;
+    --radius: 0px;
+  }
+
+  .dark {
+    --background: 220 16% 22%;
+    --foreground: 218 22% 92%;
+    --card: 220 14% 27%;
+    --card-foreground: 218 22% 92%;
+    --popover: 220 14% 27%;
+    --popover-foreground: 218 22% 92%;
+    --primary: 12 93% 64%;
+    --primary-foreground: 0 0% 100%;
+    --secondary: 220 13% 31%;
+    --secondary-foreground: 218 22% 92%;
+    --muted: 220 13% 31%;
+    --muted-foreground: 218 14% 70%;
+    --accent: 220 13% 33%;
+    --accent-foreground: 218 22% 92%;
+    --border: 220 12% 38%;
+    --input: 220 12% 38%;
+    --ring: 12 93% 64%;
+    --destructive: 351 95% 71%;
+    --destructive-foreground: 220 24% 12%;
+    --success: 142 69% 58%;
+    --success-foreground: 220 24% 12%;
+    --warning: 41 93% 55%;
+    --warning-foreground: 220 24% 12%;
+    --info: 214 74% 64%;
+    --info-foreground: 220 24% 12%;
+    --radius: 0px;
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}
+
 body {
   scroll-behavior: smooth;
 }

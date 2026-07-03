@@ -1,14 +1,15 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Saira } from "next/font/google";
 import "./globals.scss";
 import { Toaster } from "@/components/ui/toaster";
 import { ThemeProvider } from "./providers/ThemeProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+// MissionControl typeface (Metro Warm). Replaces the kit's Inter app-wide.
+const saira = Saira({ subsets: ["latin"], weight: ["400", "500", "600", "700"] });
 
 export const metadata: Metadata = {
-  title: "Moose Next Framework v3",
-  description: "This is just ui/ux framework with Shadcn",
+  title: "MissionControl — Super Admin",
+  description: "Cyber Pharma platform operations console (PHI-free).",
 };
 
 export default function RootLayout({
@@ -16,13 +17,15 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  // Dark by default: html ships class="dark" for a dark first paint (no flash);
+  // next-themes keeps dark as the default while the ThemeToggle still switches.
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={inter.className}>
+    <html lang="en" className="dark" suppressHydrationWarning>
+      <body className={saira.className}>
         <ThemeProvider
           attribute="class"
-          defaultTheme="system"
-          enableSystem={true}
+          defaultTheme="dark"
+          enableSystem={false}
           disableTransitionOnChange
         >
           {children}

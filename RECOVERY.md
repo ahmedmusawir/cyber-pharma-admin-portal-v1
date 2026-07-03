@@ -1,30 +1,34 @@
 # Recovery State
 
-Last action (2026-06-29): COMPLETED Phase-1 Pre-Flight Hygiene + Jest dep-hygiene. Build + tests GREEN (81/81, 11/11).
-Current state: jsonsrv cascade / ghl-hooktest / route-1 / layout-org / dup docs/setup.sql DELETED;
-  tsconfig excludes agent_docs+_SKILLS; jest fixed via overrides(jest-mock=30.4.1) + jest-environment-jsdom^30.4.1.
-  Uncommitted (no git ops done): see `git status`. Verified: `npm run build` ✓, `npm test` 81/81 ✓.
-Pending: NOTHING blocking. Architect can author FFM from the recon report.
-Next step: Operator decides recon open-questions (posts cascade / stripe dep / DashboardCard) THEN FFM authoring.
+Last action (2026-07-03): COMPLETED the full Phase-1 FFM (all 6 sub-phases). Retrospective written.
+Current state: MissionControl FFM DONE on branch `phase-1-FFM`. 12/12 verification gates PASS live.
+  Build GREEN, `npm test` 81/81. Dashboard chart defect found+fixed in verification.
+  ⚠️ ALL FFM WORK IS UNCOMMITTED (types→services→mocks→components→chart fix). No git commit yet.
+Pending: NONE blocking. Operator decision: commit the FFM work? + ledger items below.
+Next step: (a) commit FFM if desired; (b) act on the trickle-up promotions in the retrospective.
 
-## Standing rule (this session): mirror every plan/report/verification to agent_docs/RESPONSES/
-  pattern response_<date>_<HHMMSS>_<slug>.md BEFORE printing to screen.
+## Phase-1 FFM sub-phases (all COMPLETE)
+0 Discovery ✓ · 1 Types ✓ · 2 Services ✓ · 3 Mocks ✓ · 4 Components (9 screens) ✓ ·
+5 Verification (12/12 live) ✓ · 6 Retrospective ✓
 
-## Trail (agent_docs/RESPONSES/)
-- response_2026-06-29_132516_preflight-plan.md
-- response_2026-06-29_134337_preflight-execution-result.md
-- response_2026-06-29_171742_jest-dep-hygiene-plan.md
-- response_2026-06-29_172435_jest-dep-hygiene-result.md
+## What shipped (uncommitted)
+- src/types/mission-control/* · src/services/mission-control/* (+ session.ts real auth) ·
+  src/mocks/mission-control/store.ts · src/app/(mission-control)/* (9 screens) + /login ·
+  src/components/mission-control/* · 4 ui primitives · globals token layer + Saira + dark default.
 
-## ▶ ON RESUME — GO STRAIGHT TO BUSINESS
-1. Read `agent_docs/RECON/RECON_cyber-pharma_phase1_2026-06-28.md` — the recon report (source of truth).
-2. Biggest drifts to honor before any FFM line: app-role.ts MISSING, AppShellPage MISSING,
-   useAuthStore has NO isAdmin/isSuperadmin/isMember flags + user:any, ThemeToggle→ThemeToggler.
-3. Cleanup buckets + open questions are in the report's "Recommendation to Architect".
-4. FFM target: `_SKILLS/super_admin_portal_phase1_ffm/`. Plan: `agent_docs/CYBER_PHARMA_8_PHASE_PLAN_v1_2.md`.
+## Standing rule (session): mirror every plan/report/verification/retrospective to agent_docs/RESPONSES/
+  as response_<date>_<HHMMSS>_<slug>.md BEFORE printing. (Now global doctrine — CLAUDE.md v3.1.)
 
-## Key facts (Tony's corrections — already approved, do NOT re-ask)
-- Approval: Option 1, FULL 6 PHASES. Phase label = `phase1` (Super Admin Portal Phase 1).
-- Session logs → `agent_docs/SESSIONS/` (not root). Recon reports → `agent_docs/RECON/` (uppercase).
-- Brand assets to use: `agent_docs/branding_stuff/` (logos, favicon-512, brand_preview).
-- FFM target: `agent_docs/CURRENT_APP/super_admin_portal_phase1_ffm/`. Plan: `agent_docs/CYBER_PHARMA_8_PHASE_PLAN_v1_2.md`.
+## Open ledger (from the retrospective — promote UP to the kit)
+- Kit: ship token :root block in globals; pin jest-mock 30.4.1 + jest-environment-jsdom ^30.4.1;
+  add server-only; correct handbook (app-role.ts / AppShellPage / useAuthStore flags; add
+  role==='superadmin' canonical super-admin check).
+- Recon skill: verify the :root token block exists on disk (not just the globals file).
+- FFM skill: RED-list-in-types/services; empty-seam mocks; mandatory real-screen verification.
+- Deferred: recharts-vs-CSS-chart at real-data phase; server-only dep add.
+
+## Verification credential (test): superadmin@email.com / pass1234 (real Supabase, role superadmin).
+
+## Trail (agent_docs/RESPONSES/) — full artifact set for this FFM
+discovery · types · services · mocks · components-chunk1 · components-complete ·
+verification (superseded) · verification-live · retrospective.

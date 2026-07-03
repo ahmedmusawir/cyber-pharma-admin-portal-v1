@@ -2,7 +2,7 @@
 
 > **AI App Factory — Stark Industries**
 > *System prompt for Claude Code agentic coding sessions.*
-> *Version: 3.0 | March 2026*
+> *Version: 3.1 | July 2026*
 
 ---
 
@@ -194,6 +194,40 @@ Layer 3: Tony's approval
 ```
 
 Each layer compensates for the weakness of the previous one. All three must be active.
+
+---
+
+## RESPONSE LOGGING PROTOCOL (v1.0)
+
+Every substantive artifact you produce — plans, reports, investigation
+results, verification results, rulings, retrospectives, handoffs — MUST be
+written to a file BEFORE printing to screen.
+
+**Location:** `agent_docs/RESPONSES/` (create if absent).
+
+**Naming:** `response_<YYYY-MM-DD>_<HHMMSS>_<short-slug>.md`
+— timestamp to the second, actual current time; slug describes content
+(e.g. `discovery`, `types`, `preflight-plan`, `dep-hygiene-result`).
+
+**Format:** mirror the on-screen output exactly — same structure, headers,
+tables. Do not reformat for the file.
+
+**What qualifies:** anything the Operator or Architect would need to read,
+approve, or recover from. Conversational replies and short confirmations do
+NOT get logged.
+
+**Why:** crash resilience (the file survives a CLI death mid-session),
+clipboard-free review (Operator reads in VS Code), and a timestamped audit
+trail of every decision artifact.
+
+**Recovery cue:** if the Operator says "log it", you missed a write —
+immediately write the last artifact to the folder, then continue.
+
+**Relationship to the Session Memory Protocol:** these two protocols are
+complementary, not interchangeable. The session file tracks status
+transitions (PENDING_APPROVAL → APPROVED → COMPLETE); `agent_docs/RESPONSES/`
+holds the full artifact as a standalone readable file. Both writes fire;
+neither substitutes for the other.
 
 ---
 
@@ -578,7 +612,7 @@ POTENTIAL CONCERNS:
 - **Build First, Refactor Later:** Get things working before optimizing
 - **Eyesight-Aware:** Explanations ALWAYS come before code blocks (for audio playback during eye rest — no surprises)
 - **Minimal & Purposeful Code:** Only include what has changed unless explicitly asked
-- **App Router Only (Next.js 13-15):** No `getStaticProps`, `getServerSideProps`
+- **App Router Only (Next.js 13+, currently 16):** No `getStaticProps`, `getServerSideProps`
 - **Zustand for State:** Not Redux, not Context API sprawl
 - **`html-react-parser` over `dangerouslySetInnerHTML`**
 - **`/types` folder:** All interfaces and Pydantic models go here — never `/models`
@@ -608,12 +642,12 @@ Always.
 
 | Layer | Technology |
 |-------|-----------|
-| Frontend | Next.js 15, TypeScript, Tailwind, ShadCN, Zustand |
+| Frontend | Next.js 16, TypeScript, Tailwind, ShadCN, Zustand |
 | Backend | FastAPI + Uvicorn (Python), Supabase |
 | AI/Agents | Google ADK, Vertex AI, Gemini 2.5 Flash/Pro, LangGraph |
 | RAG | Google File Search API (`google-genai==1.55.0`) |
 | Infrastructure | Cloud Run, GCS, Vercel, DigitalOcean (staging) |
-| Testing | pytest (Python — clean venv required), Vitest (TypeScript) |
+| Testing | pytest (Python — clean venv required), Jest (TypeScript) |
 | Python Setup | requirements.txt + venv + pip (no Poetry/pyproject.toml) |
 | State (dev rigs) | Flat JSON files (`projects.json`) — no database for local tools |
 | UI (dev rigs) | Streamlit — all calls go through HTTP to FastAPI, no direct imports |
@@ -682,4 +716,4 @@ Every time. No exceptions.**
 ---
 
 *Part of the AI App Factory documentation suite.*
-*Version: 3.0 | March 2026*
+*Version: 3.1 | July 2026*
