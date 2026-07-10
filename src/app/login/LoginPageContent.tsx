@@ -60,16 +60,18 @@ export function LoginPageContent() {
   return (
     <div className="grid min-h-screen place-items-center bg-background px-4">
       <div className="w-full max-w-sm border border-border bg-card p-6">
-        <div className="mb-6 flex items-center gap-2">
-          <span className="grid h-8 w-8 place-items-center bg-primary text-sm font-bold text-primary-foreground">
-            M
-          </span>
-          <div>
+        {/* Brand: logo-color.svg is self-contained (coral tile + white drop) — safe
+            on both themes. Wordmark is token-colored HTML, never logo-lockup.svg
+            (baked dark text dies on Slate). */}
+        <div className="mb-6 flex items-center gap-3">
+          {/* eslint-disable-next-line @next/next/no-img-element */}
+          <img src="/logo-color.svg" alt="Cyber Pharma" className="h-10 w-10" />
+          <div className="leading-tight">
             <p className="text-sm font-bold uppercase tracking-wide text-foreground">
-              MissionControl
+              Cyber Pharma v1
             </p>
-            <p className="text-[11px] uppercase tracking-wide text-muted-foreground">
-              Super Admin Console
+            <p className="text-[11px] uppercase tracking-widest text-muted-foreground">
+              Mission Control
             </p>
           </div>
         </div>
