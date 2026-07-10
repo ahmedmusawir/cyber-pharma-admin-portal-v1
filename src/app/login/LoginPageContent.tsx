@@ -109,10 +109,7 @@ export function LoginPageContent() {
           </Button>
         </form>
 
-        <div className="mt-4 flex items-center justify-between text-[11px] text-muted-foreground">
-          <a href="/auth" className="hover:text-foreground">
-            Forgot password?
-          </a>
+        <div className="mt-4 flex items-center justify-end text-[11px] text-muted-foreground">
           <span className="inline-flex items-center gap-1">
             <ShieldCheck className="h-3 w-3" />
             No PHI in this console

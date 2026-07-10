@@ -27,7 +27,8 @@ export async function GET(request: NextRequest) {
     }
   }
 
-  // return the user to an error page with some instructions
-  redirectTo.pathname = "/error";
+  // Failed/expired link: land on the login screen (F-1 ruling 2026-07-10 —
+  // /error deleted with the kit surfaces; recovery is Supabase-console-only in v1)
+  redirectTo.pathname = "/login";
   return NextResponse.redirect(redirectTo);
 }

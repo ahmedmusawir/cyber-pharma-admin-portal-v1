@@ -1,13 +1,19 @@
 # Recovery State
 
-Last action (2026-07-10 13:20): **FIX PHASE 2 RECON COMPLETE** — kit-surface consumer trace (read-only,
-  repo unchanged). Kill-list: 102 files DELETE; MC KEEP manifest = 15 ui/ + 9 kit-infra files.
-  ONE retarget seam: LoginPageContent.tsx:113 "Forgot password?" → /auth (fix BEFORE (auth) dies).
-  ⚠️ useAuthStore NOT MC-consumed → DELETE. Orphaned TODAY: stripe, @playwright/test, dotenv,
-  styles/global.scss. Predicted post-cleanup tests: 2 suites / 8 tests (from 11/81).
-  Report: agent_docs/RESPONSES/response_2026-07-10_131658_fix2-recon.md.
-Pending: FIX PHASE 2 cleanup plan (separate approved task). Open Qs: supabase client.ts/admin.ts
-  keep-or-delete (Phase-2 infra), zustand dep fate.
+Last action (2026-07-10 18:28): **FIX PHASE 2 CLEANUP COMPLETE** — kill list executed on branch
+  `phase-1-cleanup` (operator-cut, was clean). 100 paths deleted (99 code + 1 test-README) +
+  2 surgeries (LoginPageContent forgot-password link REMOVED; confirm-route failure redirect
+  /error → /login per F-1 ruling). Rulings: client.ts + admin.ts KEPT (zero-consumer blessed
+  Phase-2 infra — will look dead to recons); deps/package.json UNTOUCHED (dep-hygiene task owns
+  stripe/playwright/dotenv/zustand/RHF/zod/heroicons/cmdk/radix-tabs-avatar-select removals).
+  GATES ALL GREEN: tsc · build (route table exact: /, /login, 8 MC screens,
+  api/auth/{login,logout,confirm}, not-found) · npm test 2 suites / 8 tests EXACTLY ·
+  live walk 15/15 real Supabase (9 screens, redirect chains, dead routes 404).
+  Artifacts: response_2026-07-10_131658_fix2-recon.md · _135116_fix2-cleanup-plan.md ·
+  _182815_fix2-cleanup-result.md.
+Pending: operator visual browser pass; commit point ripe on `phase-1-cleanup` (operator's git).
+Next candidates: dep-hygiene pass (owns all package removals) · MC unit-test buildout (coverage
+  now infra-only by design) · deploy-for-client-review (FFM track).
 
 Prior action (2026-07-09 20:06): **NAV SPINNER COMPLETE** — SpinnerLarge in content slot on every nav
   (sidebar static): (mission-control)/loading.tsx (hard loads) + Shell transition-pending (client navs —
