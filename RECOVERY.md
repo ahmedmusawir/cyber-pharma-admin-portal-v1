@@ -11,9 +11,22 @@ Last action (2026-07-10 18:28): **FIX PHASE 2 CLEANUP COMPLETE** — kill list e
   live walk 15/15 real Supabase (9 screens, redirect chains, dead routes 404).
   Artifacts: response_2026-07-10_131658_fix2-recon.md · _135116_fix2-cleanup-plan.md ·
   _182815_fix2-cleanup-result.md.
-Pending: operator visual browser pass; commit point ripe on `phase-1-cleanup` (operator's git).
-Next candidates: dep-hygiene pass (owns all package removals) · MC unit-test buildout (coverage
-  now infra-only by design) · deploy-for-client-review (FFM track).
+Operator visual pass DONE ("pristine") · ALL COMMITTED & PUSHED on `phase-1-cleanup`.
+Post-push addendum (18:52): **PHASE-1 CLOSE-OUT RETROSPECTIVE written** (architect-tasked, closes
+  the FFM): playbook/RETROSPECTIVES/RUN_002_phase1_closeout.md + mirror
+  response_2026-07-10_185201_retrospective.md. Includes KIT-SHED SKILL INPUTS map.
+Pending: retro pair + session/RECOVERY docs UNCOMMITTED (operator's git — small doc commit ripe).
+
+## ▶ NEXT SESSION — GO STRAIGHT TO BUSINESS
+**Deploy to STAGING using the devops GCS deployment skill** — operator will supply the skill
+("coming soon"): on resume, look for it in `_SKILLS/` (or agent_docs/.claude/skills) BEFORE
+planning any deploy; read its CLAUDE.md/SKILL.md first, same as stark-recon.
+**PHASE 1 IS FORMALLY CLOSED** (retro: playbook/RETROSPECTIVES/RUN_002_phase1_closeout.md).
+FFM track: staging deploy → client review → iterate. NO backend until client approves.
+Queued after: dep-hygiene pass (owns ALL package removals: stripe, @playwright/test, dotenv,
+zustand, RHF+resolvers, zod, heroicons, cmdk, radix tabs/avatar/select) · MC unit-test buildout ·
+kit trickle-up ledger (+ new: swallow refresh_token_not_found noise in kit getUser; kill dead
+test:e2e scripts; stark-recon multi-line-import grep fix).
 
 Prior action (2026-07-09 20:06): **NAV SPINNER COMPLETE** — SpinnerLarge in content slot on every nav
   (sidebar static): (mission-control)/loading.tsx (hard loads) + Shell transition-pending (client navs —
