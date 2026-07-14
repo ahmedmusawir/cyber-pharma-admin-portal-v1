@@ -1,6 +1,21 @@
 # Recovery State
 
-Last action (2026-07-10 18:28): **FIX PHASE 2 CLEANUP COMPLETE** — kill list executed on branch
+Last action (2026-07-14 ~11:55): **PATH A PROJECT BOOTSTRAP COMPLETE** (deploy run, APPROVED).
+  GCP project `cyberize-nextjs-staging` ACTIVE · billing linked (014A57-70D5C5-B41710) · 5 APIs
+  enabled · AR repo `cloud-run-source-deploy` (us-east1). All truth-command verified, operator-
+  executed (guidance-only). Decisions locked: app `cyph-mission-ctrl` · service
+  `cyph-mission-ctrl-prod` · SA `sa-cyph-mission-ctrl-runtime` · invoker PUBLIC · domain =
+  cyberizedev.com subdomain (exact TBD). NOTE: this repo = MISSION CONTROL app (package
+  `cyph-mission-control-v1`) — deploys first; main Cyber Pharma app is a separate repo in cleanup.
+Pending: `next-deploy-generate` intake (incl. secret classification from code) → generate 5
+  deployment files → `next-deploy-execute`.
+Next step: read next-deploy-generate/SKILL.md, run intake, present table, generate on approval.
+  Sessions: session_2026-07-13.md (activation) · session_2026-07-14.md (live).
+  Artifacts: response_2026-07-13_183500_path-a-plan.md · response_2026-07-14_093306_path-a-bootstrap-commands.md.
+
+---
+
+Prior action (2026-07-10 18:28): **FIX PHASE 2 CLEANUP COMPLETE** — kill list executed on branch
   `phase-1-cleanup` (operator-cut, was clean). 100 paths deleted (99 code + 1 test-README) +
   2 surgeries (LoginPageContent forgot-password link REMOVED; confirm-route failure redirect
   /error → /login per F-1 ruling). Rulings: client.ts + admin.ts KEPT (zero-consumer blessed

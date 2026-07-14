@@ -1,0 +1,48 @@
+substitutions:
+  _REGION: "us-east1"
+  _SERVICE_NAME: "cyph-mission-ctrl-prod"
+  _NEXT_PUBLIC_APP_URL: "https://mission-portal.cyberizedev.com"
+  _NEXT_PUBLIC_SITE_URL: "https://mission-portal.cyberizedev.com"
+  _NEXT_PUBLIC_SUPABASE_URL: "https://yrsuwikjnbmvpznrgydb.supabase.co"
+  _NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: "sb_publishable_8FvPLZTmChxMrPwv7q9-rw_NgjoDk1S"
+
+steps:
+  # 1. Build Docker Image (no secrets at build time)
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Build Image"
+    args:
+      - "build"
+      - "--build-arg"
+      - "NEXT_PUBLIC_APP_URL=${_NEXT_PUBLIC_APP_URL}"
+      - "--build-arg"
+      - "NEXT_PUBLIC_SITE_URL=${_NEXT_PUBLIC_SITE_URL}"
+      - "--build-arg"
+      - "NEXT_PUBLIC_SUPABASE_URL=${_NEXT_PUBLIC_SUPABASE_URL}"
+      - "--build-arg"
+      - "NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${_NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}"
+      - "-t"
+      - "us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/${_SERVICE_NAME}:latest"
+      - "."
+
+  # 2. Push to Artifact Registry
+  - name: "gcr.io/cloud-builders/docker"
+    id: "Push Image"
+    args: ["push", "us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/${_SERVICE_NAME}:latest"]
+
+  # 3. Deploy to Cloud Run
+  - name: "gcr.io/google.com/cloudsdktool/cloud-sdk"
+    entrypoint: "gcloud"
+    id: "Deploy to Cloud Run"
+    args:
+      [
+        "run", "deploy", "${_SERVICE_NAME}",
+        "--image", "us-east1-docker.pkg.dev/$PROJECT_ID/cloud-run-source-deploy/${_SERVICE_NAME}:latest",
+        "--region", "${_REGION}",
+        "--platform", "managed",
+        "--allow-unauthenticated",
+        "--service-account", "sa-cyph-mission-ctrl-runtime@$PROJECT_ID.iam.gserviceaccount.com",
+        "--set-secrets",
+        "SUPABASE_SECRET_KEY=cyph-mission-ctrl-supabase-secret-key:latest",
+        "--memory", "1Gi",
+        "--max-instances", "1",
+      ]
