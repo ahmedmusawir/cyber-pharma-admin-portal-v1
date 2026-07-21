@@ -1,6 +1,20 @@
 # Recovery State
 
-Last action (2026-07-14 ~11:55): **PATH A PROJECT BOOTSTRAP COMPLETE** (deploy run, APPROVED).
+Last action (2026-07-21 ~12:35): **DEPLOY PACKAGE COMPLETE + STANDALONE BLOCKER CLEARED.**
+  5 files generated 2026-07-14 (Dockerfile, cloudbuild.yaml Template B, deploy.sh, init-app.sh,
+  DEPLOYMENT_CHECKLIST.md — operator committed, 663e0c0, branch `gcs-deploy-2`). Today:
+  `output: "standalone"` added to next.config.js (operator-approved) — build GREEN, exact route
+  table, .next/standalone/server.js EXISTS. Surfaced deviations logged in
+  response_2026-07-14_150210_generate-phase2-result.md (node:22, SITE_URL+APP_URL, prefilled
+  public vars).
+Pending: generate-skill Phase 3 handoff presented — awaiting operator "deploy now" to engage
+  **next-deploy-execute** (init-app.sh → real secret value → ./deploy.sh → domain mapping
+  mission-portal.cyberizedev.com → invoker PUBLIC). Checklist = DEPLOYMENT_CHECKLIST.md.
+Next step: operator runs checklist §1–2 with agent guiding (execute skill Phase 0 plan first).
+
+---
+
+Prior action (2026-07-14 ~11:55): **PATH A PROJECT BOOTSTRAP COMPLETE** (deploy run, APPROVED).
   GCP project `cyberize-nextjs-staging` ACTIVE · billing linked (014A57-70D5C5-B41710) · 5 APIs
   enabled · AR repo `cloud-run-source-deploy` (us-east1). All truth-command verified, operator-
   executed (guidance-only). Decisions locked: app `cyph-mission-ctrl` · service
