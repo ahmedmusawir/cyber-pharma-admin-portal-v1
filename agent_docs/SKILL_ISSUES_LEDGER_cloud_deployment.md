@@ -1,0 +1,20 @@
+# CLOUD_DEPLOYMENT_SKILLS — Issues Ledger (live document)
+
+> Operator directive (2026-07-22): record every issue faced while following the skill,
+> as it happens. Feeds the lessons-learned report + skill v3 redo.
+> Run: cyph-mission-ctrl → cyberize-nextjs-staging (Path A, first deploy). Started 2026-07-13.
+
+| # | Date | Phase | Issue | Root cause | Fix applied | Skill change needed |
+|---|------|-------|-------|-----------|-------------|---------------------|
+| 1 | 07-14 | Activation | CLAUDE.md references `init-gcp-project.sh` + `install-gcloud.sh` templates; TEMPLATES.md v2 has neither | Doc drift between family CLAUDE.md and TEMPLATES.md | Manual guided bootstrap per §5.2 | Add both templates to TEMPLATES.md or fix CLAUDE.md references |
+| 2 | 07-14 | Generate | Template Dockerfile pins `node:18-alpine`; Next 16 requires Node ≥ 20 | Template predates Next 15/16 engine bumps | Generated with `node:22-alpine` | Parameterize Node version; detect from package.json engines / Next major |
+| 3 | 07-14 | Generate | Template assumes `output: "standalone"` already set; repo lacked it → Dockerfile Stage 3 would hard-fail | Generate skill has no next.config.js pre-check | Operator-approved one-line add; build-verified | Add explicit next.config.js standalone check to generate Phase 1 intake |
+| 4 | 07-21 | Phase 1 | `init-app.sh` run 1 died: SA created, IAM bind ms later → 400 "SA does not exist" (propagation race); `set -e` killed script before verification | Template has no wait/retry between SA create and bind | Idempotent re-run succeeded | Add sleep/retry loop (or `--condition=None` retry wrapper) after SA creation |
+| 5 | 07-21 | Phase 3 | `deploy.sh` failed: gcloud "unrecognized arguments" on substitutions | TEMPLATE BUG: `--substitutions` split across `,\` continuation lines — bash keeps each line's leading indent → separate argv tokens; bites with >1 var line | Rebuilt as single SUBSTITUTIONS string (`+=` per var), passed as one quoted arg | Fix Template 3 execution block — string-builder pattern |
+| 6 | 07-22 | Phase 5 | `gcloud run domain-mappings create --region` → "unrecognized arguments"; GA track no longer carries the command with --region | gcloud moved run domain-mappings to alpha/beta tracks; skill + checklist use stale GA form | Re-issued with `gcloud beta` prefix | Update SKILL.md Phase 5 + Template 5 checklist to `gcloud beta run domain-mappings ...` (and note Google is steering toward LB/custom-domain alternatives) |
+| 7 | 07-21 | Phase 3/6 | `--allow-unauthenticated` warned "Setting IAM policy failed" → service 403'd post-deploy until manual Actor A binding | Build SA lacks run.services.setIamPolicy. REFINED 07-22 (policy dump EVIDENCE): compute default SA (build SA on this 2026 project) DID have roles/editor — but Editor excludes *.setIamPolicy perms, so the flag can never work on Editor alone; run.admin is the missing piece | Actor A bound allUsers manually (07-21); **CLOSED 07-22: run.admin granted to 524380376459-compute@developer.gserviceaccount.com, binding verified in policy output** | **STAGING RULE (operator-ruled, unqualified):** Path A bootstrap must grant build SA run.admin right after project creation. Also pre-warn operator: first URL 403s until binding lands |
+| 8 | 07-21 | Phase 3 | Chrome Safe Browsing flags fresh *.run.app URL "Dangerous"; autofill/login weirdness (incognito clean) | Fresh Cloud Run URLs commonly tripped by Safe Browsing | None needed — custom domain retires the URL | Add smoke-test note to SKILL.md Phase 3.4: expect Safe Browsing noise on raw run.app; test in incognito |
+
+| 9 | 07-22 | Phase 4/5 | Domain unverified (confirmed: "no verified domains"); gcloud's error suggests verifying the SUBDOMAIN (`mission-portal.cyberizedev.com`) — misleading | Verifying a subdomain covers only that subdomain; base-domain verification covers all present + future subdomains | Verified base domain `cyberizedev.com` instead | SKILL.md Phase 4: state explicitly "always verify the base domain, ignore gcloud's subdomain suggestion" |
+
+<!-- append new rows as issues occur; renumber nothing -->

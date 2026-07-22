@@ -1,6 +1,23 @@
 # Recovery State
 
-Last action (2026-07-21 ~12:35): **DEPLOY PACKAGE COMPLETE + STANDALONE BLOCKER CLEARED.**
+Last action (2026-07-22 16:52): **🏁 STAGING DEPLOY CLOSED — 6/6 FAMILY CRITERIA GREEN.**
+  https://mission-portal.cyberizedev.com LIVE with managed SSL (curl: HTTP/2 307 → /dashboard,
+  Google Frontend). Full run today: Issue #6 (domain-mappings now `gcloud beta`) → Phase 4
+  triggered (base domain cyberizedev.com verified via DO TXT — NOT the subdomain, Issue #9) →
+  mapping created → DO CNAME mission-portal→ghs.googlehosted.com. live (dig proof) → SSL issued.
+  **RETROSPECTIVE + SKILL v3 REBUILD REPORT written (operator-tasked):**
+  agent_docs/RESPONSES/response_2026-07-22_165223_deploy-retrospective-skill-v3.md — all 9
+  ledger issues analyzed, per-file v3 change list, missed-permission closing commands in §5.
+  UPDATE 17:0x — **Issue #7 CLOSED:** build SA run.admin granted (compute default SA,
+  binding verified in policy output). Root-cause refined: compute SA had Editor all along;
+  Editor excludes setIamPolicy → run.admin was the missing piece (ledger row 7 amended).
+Pending: NOTHING on the deploy run · commit point RIPE (operator git) · skill v3 rebuild
+  when operator tasks it.
+Next step: FFM track — client review of staging URL → iterate. NO backend until client approves.
+
+---
+
+Prior action (2026-07-21 ~12:35): **DEPLOY PACKAGE COMPLETE + STANDALONE BLOCKER CLEARED.**
   5 files generated 2026-07-14 (Dockerfile, cloudbuild.yaml Template B, deploy.sh, init-app.sh,
   DEPLOYMENT_CHECKLIST.md — operator committed, 663e0c0, branch `gcs-deploy-2`). Today:
   `output: "standalone"` added to next.config.js (operator-approved) — build GREEN, exact route
