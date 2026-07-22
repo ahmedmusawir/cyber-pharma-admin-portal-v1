@@ -29,17 +29,18 @@ echo "=================================================="
 gcloud config set project "$PROJECT_ID" --quiet
 
 echo "🚀 Submitting Cloud Build..."
+SUBSTITUTIONS="_REGION=${REGION}"
+SUBSTITUTIONS+=",_SERVICE_NAME=${SERVICE_NAME}"
+SUBSTITUTIONS+=",_NEXT_PUBLIC_APP_URL=${NEXT_PUBLIC_APP_URL}"
+SUBSTITUTIONS+=",_NEXT_PUBLIC_SITE_URL=${NEXT_PUBLIC_SITE_URL}"
+SUBSTITUTIONS+=",_NEXT_PUBLIC_SUPABASE_URL=${NEXT_PUBLIC_SUPABASE_URL}"
+SUBSTITUTIONS+=",_NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY=${NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY}"
+
 gcloud builds submit \
   --project "$PROJECT_ID" \
   --region "$REGION" \
   --config cloudbuild.yaml \
-  --substitutions \
-    _REGION="$REGION",\
-    _SERVICE_NAME="$SERVICE_NAME",\
-    _NEXT_PUBLIC_APP_URL="$NEXT_PUBLIC_APP_URL",\
-    _NEXT_PUBLIC_SITE_URL="$NEXT_PUBLIC_SITE_URL",\
-    _NEXT_PUBLIC_SUPABASE_URL="$NEXT_PUBLIC_SUPABASE_URL",\
-    _NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY="$NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY"
+  --substitutions "$SUBSTITUTIONS"
 
 echo "=================================================="
 echo "✅ Deployment Sequence Complete."
