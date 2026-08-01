@@ -1,6 +1,45 @@
 # Recovery State
 
-Last action (2026-07-22 16:52): **🏁 STAGING DEPLOY CLOSED — 6/6 FAMILY CRITERIA GREEN.**
+## 🔴🔴 READ THIS FIRST — LIVE EXPOSURE, UNREMEDIATED (2026-08-01)
+**Line ~155 of this file publishes a WORKING SUPERADMIN LOGIN** (`superadmin@email.com` /
+`pass1234`) for the LIVE, PUBLIC site at https://mission-portal.cyberizedev.com
+(`--allow-unauthenticated`). The Supabase project URL is also tracked (`deploy.sh:17`).
+Together: project URL + client key + superadmin credential. Only RLS is in the way.
+**ACTION REQUIRED BY OPERATOR: rotate that password.** Deleting the line does NOT
+remediate — it is in git history (96ed539 and earlier). Rotation is the fix.
+Left in place deliberately so it isn't lost before rotation; strip it after.
+
+---
+
+Last action (2026-08-01 19:18): **PUBLIC-SHOWCASE PREP — PART 1 SECURITY SWEEP: 🔴 FLAGGED.**
+  Operator-tasked 3-part pass (sweep → verify numbers → README augment), gated to stop if
+  Part 1 flagged red. **It did. Parts 2 and 3 NOT started.** Read-only — zero files modified.
+  Artifact: `agent_docs/RESPONSES/response_2026-08-01_191842_showcase-security-sweep-part1.md`
+  · Session: `agent_docs/SESSIONS/session_2026-08-01.md`
+  **Results:** (1) tracked env files ✅ CLEAN — zero tracked, sibling repo's `.env copy.example`
+  fossil NOT present; (2) secrets 🔴 — live Supabase publishable key hardcoded `deploy.sh:18`
+  + `cloudbuild.yaml:7`, real project ref `yrsuwikjnbmvpznrgydb.supabase.co`, full GCP estate
+  map; CLEAN on JWTs/service-role/Stripe/AWS/GH (all provider hits are doc placeholders);
+  (3) mock/PHI 🟠 — `src/mocks/.../store.ts` genuinely PHI-free w/ `.example` emails, BUT
+  3 NPIs pass the Luhn+80840 checksum (`1063511111`:87, `1063519999`:144, `1770000002`:285)
+  → resolvable in public NPPES; "Barack Obama" fossil CONFIRMED in 5 design HTMLs;
+  (4) Frank/Coach 🔴 **RED = the stop condition** — `Frank Tant` + `frank@frankrx.com` in
+  2 design HTMLs, `Coach` in 11 dated approval records, `Heather` (Frank's employee) with
+  her access level debated in writing, `Mical`, `moose@cyberizegroup.com`;
+  (5) stale claims 🟡 — "81 tests" changelog fossil vs 2 test files on disk, dead `test:e2e`
+  scripts, tracked `test-results/`. Routes verified: 13, **no escape hatches**.
+Pending: **BLOCKING OPERATOR DECISION — disposition of `agent_docs/` (307 tracked files) +
+  `_SKILLS/`:** strip from public repo · scrub names in place · OR publish a separate curated
+  showcase repo (`src/` + `docs/` + new README) ← agent's recommendation. Part 3's README
+  framing depends on this answer, so it was NOT drafted. Mechanical scrubs #3–#8 in the
+  artifact are ready to execute on approval.
+Next step: (1) rotate superadmin password [see red block above]; (2) make the `agent_docs/`
+  call; (3) approve scrubs; (4) THEN Part 2 (npm ci → tsc → jest → build → npm audit,
+  today's numbers only) → Part 3 (README, needs operator's image URLs + factory template).
+
+---
+
+Prior action (2026-07-22 16:52): **🏁 STAGING DEPLOY CLOSED — 6/6 FAMILY CRITERIA GREEN.**
   https://mission-portal.cyberizedev.com LIVE with managed SSL (curl: HTTP/2 307 → /dashboard,
   Google Frontend). Full run today: Issue #6 (domain-mappings now `gcloud beta`) → Phase 4
   triggered (base domain cyberizedev.com verified via DO TXT — NOT the subdomain, Issue #9) →
