@@ -11,7 +11,24 @@ Left in place deliberately so it isn't lost before rotation; strip it after.
 
 ---
 
-Last action (2026-08-01 19:18): **PUBLIC-SHOWCASE PREP — PART 1 SECURITY SWEEP: 🔴 FLAGGED.**
+Last action (2026-08-05 18:11): **NAVBAR/AUTH RECON — ALL CLEAR, session closed.**
+  Operator-tasked READ-ONLY audit of MissionControl for the 3 kit-DNA patterns from Cyber
+  Pharma's "navbar saga" (client-resolved identity · global nav overlay · store-sourced role).
+  **Verdict: NO on all three** — identity server-resolved in `(mission-control)/layout.tsx` →
+  Shell via props (navLinks static, no `!user` chrome branches); nav spinner slot-scoped
+  (Shell useTransition + route-group loading.tsx, `fixed inset-0` hits = Radix backdrops only);
+  no auth store (zustand in package.json w/ ZERO imports — dep-hygiene queue). Layout tree:
+  1 Navbar mount = 1 gate, gate returns AND uses user; protectPage comments-only.
+  Zero files modified in src/. Branch `navbar-fix-1` clean, no commits beyond main.
+  Artifact: `agent_docs/RESPONSES/response_2026-08-05_181153_navbar-auth-recon.md`
+  · Session: `agent_docs/SESSIONS/session_2026-08-05.md`
+Pending: **operator ruling on `navbar-fix-1` scope** — audit was clean; branch may be retired
+  or repurposed. Plus the standing items below (password rotation · agent_docs/ disposition).
+Next step: operator rules on navbar-fix-1 → then showcase Parts 2–3 / dep-hygiene per queue.
+
+---
+
+Prior action (2026-08-01 19:18): **PUBLIC-SHOWCASE PREP — PART 1 SECURITY SWEEP: 🔴 FLAGGED.**
   Operator-tasked 3-part pass (sweep → verify numbers → README augment), gated to stop if
   Part 1 flagged red. **It did. Parts 2 and 3 NOT started.** Read-only — zero files modified.
   Artifact: `agent_docs/RESPONSES/response_2026-08-01_191842_showcase-security-sweep-part1.md`
